@@ -1,0 +1,14 @@
+[Unit]
+Description=Janus WebRTC gateway
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '. /root/janus-service/janus-service.sh; janusStart;'
+ExecStartPost=/bin/bash -c '. /root/janus-service/janus-service.sh; createToken;'
+ExecStop=/bin/bash -c '. /root/janus-service/janus-service.sh; janusStop;'
+RemainAfterExit=true
+IgnoreSIGPIPE=false
+
+[Install]
+WantedBy=multi-user.target
