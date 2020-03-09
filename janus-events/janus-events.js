@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-
+// I added a couple of tables after I got this from  https://www.meetecho.com/blog/correlating-janus-event-handlers/
+// Customized for the VideoRoom event section below
 var async = require("async");
 var fs = require('fs');
 var auth = require("basic-auth");
@@ -7,7 +8,8 @@ var http = require("http");
 var mysql = require("mysql");
 var crypto = require('crypto');
 const TeleBot = require('telebot');
-const cfg = JSON.parse(fs.readFileSync('/root/db-settings/cfg.json', 'utf8'))
+const cfgpath = require( 'path' ).join( __dirname, '..', 'db-settings/cfg.json' )
+const cfg = JSON.parse(fs.readFileSync(cfgpath, 'utf8'))
 
 var connection = null;
 const bot = new TeleBot(cfg.tb.token);
@@ -268,7 +270,7 @@ function handleEvent(json) {
 						var authstring = crypto.createHash('sha512').update(authstringraw).digest('base64');
 						var update = [room, pin, authstring, 1, when, pi_serial];
 						var query = connection.query('UPDATE registrations SET room = ?, pin = ?, authstring = ?, active = ?, timestamp = ? WHERE serial = ?', update, function(err, result) { 
-							//console.log(query);
+							console.log(update);
 							if(err) {
 								console.error("Error updating registration info in DB...", err);
 								return;
@@ -284,7 +286,7 @@ function handleEvent(json) {
 												var chatid = result[key].chatid;
 												console.log("Sending to telebotuser: "+chatid);
 												var telegramurl = cfg.tb.host+":"+cfg.tb.port+"?"+authstring+userid;
-												bot.sendMessage(chatid, "Kiss @ <a href=\""+telegramurl+"\">"+piserial+"</a>", {parseMode: 'HTML'});
+												bot.sendMessage(chatid, "Kiss @ <a href=\""+telegramurl+"\">"+pi_serial+"</a>", {parseMode: 'HTML'});
 											});
 										}
 								});
