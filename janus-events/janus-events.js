@@ -274,7 +274,7 @@ function handleEvent(json) {
 								return;
 							} else {
 								// sending to telebot
-								var query = connection.query('SELECT u.id, u.chatid, u.username FROM registrations r INNER JOIN registr_users u ON r.id = u.registrationsid WHERE r.serial = ? AND u.chatid IS NOT NULL AND u.username IS NOT NULL', [piserial], function(err, result) { 
+								var query = connection.query('SELECT u.id, u.chatid, u.username FROM registrations r INNER JOIN registr_users u ON r.id = u.registrationsid WHERE r.serial = ? AND u.chatid IS NOT NULL AND u.username IS NOT NULL', [pi_serial], function(err, result) { 
 									if(result.length){
 											// if any error while executing above query, throw error
 											if (err) throw err;
