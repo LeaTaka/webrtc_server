@@ -193,7 +193,7 @@ $(document).ready(function() {
 															for(var f in list) {
 																var id = list[f]["id"];
 																var displaystring = JSON.parse(list[f]["display"]);
-																var display = displaystring["piserial"];
+																var display = displaystring["pi_serial"];
 																var audio = list[f]["audio_codec"];
 																var video = list[f]["video_codec"];
 																Janus.debug("  >> [" + id + "] " + display + " (audio: " + audio + ", video: " + video + ")");
@@ -239,7 +239,7 @@ $(document).ready(function() {
 															for(var f in list) {
 																var id = list[f]["id"];
 																var displaystring = JSON.parse(list[f]["display"]);
-																var display = displaystring["piserial"];
+																var display = displaystring["pi_serial"];
 																var audio = list[f]["audio_codec"];
 																var video = list[f]["video_codec"];
 																Janus.debug("  >> [" + id + "] " + display + " (audio: " + audio + ", video: " + video + ")");
@@ -406,7 +406,7 @@ $(document).ready(function() {
 
 function registerUsername() {
 		myroom = parseInt(mysql_room);
-		myusername = '{ "piserial": "'+mysql_username+'", "pin": "" }';
+		myusername = '{ "pi_serial": "'+mysql_username+'", "pin": "" }';
 		myroompin = mysql_pin;
 		var register = { "request": "join", "room": myroom, "pin": mysql_pin, "ptype": "publisher", "display": myusername };
 		sfutest.send({"message": register});
@@ -524,7 +524,7 @@ function newRemoteFeed(id, display, audio, video) {
 						// this is done to match the response from the post which is also json
 						remoteFeed.rfid = msg["id"];
 						let rfdisplaystring = JSON.parse(msg["display"]);
-						remoteFeed.rfdisplay = rfdisplaystring["piserial"];
+						remoteFeed.rfdisplay = rfdisplaystring["pi_serial"];
 						if(remoteFeed.spinner === undefined || remoteFeed.spinner === null) {
 							var target = document.getElementById('videoremote'+remoteFeed.rfindex);
 							remoteFeed.spinner = new Spinner({top:100}).spin(target);
