@@ -259,14 +259,14 @@ function handleEvent(json) {
 					var room = event["room"];
 					var userId = event["id"];
 					var display = JSON.parse(event["display"]);
-					var piserial = (display["piserial"]);
+					var pi_serial = (display["pi_serial"]);
 					var pin = (display["pin"]);
-					var insert = { session: sessionId, handle: handleId, roomid: room, userid: userId, displayname: piserial, timestamp: when };
+					var insert = { session: sessionId, handle: handleId, roomid: room, userid: userId, displayname: pi_serial, timestamp: when };
 					var query = connection.query('INSERT INTO participants SET ?', insert, function(err, result) {
 						// update indien record bestaat, zoek op serial
-						var authstringraw = room+pin+piserial;
+						var authstringraw = room+pin+pi_serial;
 						var authstring = crypto.createHash('sha512').update(authstringraw).digest('base64');
-						var update = [room, pin, authstring, 1, when, piserial];
+						var update = [room, pin, authstring, 1, when, pi_serial];
 						var query = connection.query('UPDATE registrations SET room = ?, pin = ?, authstring = ?, active = ?, timestamp = ? WHERE serial = ?', update, function(err, result) { 
 							//console.log(query);
 							if(err) {
