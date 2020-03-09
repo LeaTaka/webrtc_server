@@ -1,1 +1,31 @@
-xx
+{
+	"db" : {
+		"host": "localhost",
+		"user": "",
+		"password": "",
+		"database": ""
+	},
+	"jnsevents" : {
+		"port": ,
+		"auth": {
+			"username": "",
+			"password": ""
+		}
+	},
+	"jnswebsrv" : {
+		"http": "",
+		"https": ""
+	},
+	"tb" : {
+		"host": "https://www.jasconcept.com",
+		"port": "",
+		"token": "",
+		"chatid": ""
+	},
+	"jns" : {
+		"host": "https://www.jasconcept.com",
+		"port": "",
+		"path": "",
+		"adminsecret": ""
+	}
+}
